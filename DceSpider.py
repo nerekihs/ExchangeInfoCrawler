@@ -4,15 +4,14 @@
 """
 
 import csv
-import os
 from selenium import webdriver
 
 
-DEFAULT_OUTPUT_DIR = "."
+DEFAULT_SAVE_PATH = ".\\DceOptionInfo.csv"
 CHROME_WEBDRIVER = ".\\chromedriver_win32.exe"
 
 
-def save_dce_option_data(save_dir: str = DEFAULT_OUTPUT_DIR) -> None:
+def save_dce_option_data(save_path: str) -> None:
 
     url = "http://www.dce.com.cn/publicweb/businessguidelines/queryContractInfo.html"
     option = webdriver.ChromeOptions()
@@ -28,7 +27,7 @@ def save_dce_option_data(save_dir: str = DEFAULT_OUTPUT_DIR) -> None:
 
     if data:
         lines = [x.split() for x in data.split('\n')]
-        with open(os.path.join(DEFAULT_OUTPUT_DIR, "DCE_options.csv"), 'w', newline='\n', encoding='gb2312') as myfile:
+        with open(save_path, 'w', newline='\n', encoding='gb2312') as myfile:
             wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
             for line in lines:
                 wr.writerow(line)
@@ -38,4 +37,4 @@ def save_dce_option_data(save_dir: str = DEFAULT_OUTPUT_DIR) -> None:
 
 if __name__ == '__main__':
 
-    save_dce_option_data()
+    save_dce_option_data(DEFAULT_SAVE_PATH)
