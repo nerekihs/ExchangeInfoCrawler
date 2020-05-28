@@ -1,5 +1,6 @@
 """
-大商所期权信息爬虫
+大连商品交易所
+期权合约信息爬虫
 """
 
 import csv
@@ -8,14 +9,12 @@ from selenium import webdriver
 
 
 DEFAULT_OUTPUT_DIR = "."
-CHROME_WEBDRIVER = ".\\chromedriver.exe"
+CHROME_WEBDRIVER = ".\\chromedriver_win32.exe"
 
 
-# Only up-to-date data is available on DCE website, so no data param needed in class.
-def save_dce_option_data(save_dir=DEFAULT_OUTPUT_DIR) -> None:
+def save_dce_option_data(save_dir: str = DEFAULT_OUTPUT_DIR) -> None:
 
     url = "http://www.dce.com.cn/publicweb/businessguidelines/queryContractInfo.html"
-
     option = webdriver.ChromeOptions()
     option.add_argument('headless')
     w = webdriver.Chrome(CHROME_WEBDRIVER, options=option)
